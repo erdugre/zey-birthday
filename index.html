@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İyi ki Doğdun Zey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            text-align: center;
+            background-color: rgb(253, 194, 242);
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        h1 {
+            margin-top: 50px;
+            font-size: 50px;
+            color: #0B1957;
+        }
+        #instructions {
+            font-size: 18px;
+            color: #0B1957;
+        }
+        #gift-box {
+            width: 500px;
+            height: 500px;
+            background: url('present.png') no-repeat center/cover;
+            margin: 50px auto;
+            cursor: pointer;
+            position: relative;
+        }
+        .open-box {
+            animation: openBox 1s forwards;
+        }
+        @keyframes openBox {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1) translateY(0px); opacity: 0; }
+        }
+        #message {
+            display: none;
+            margin-top: 100px;
+        }
+        #photo-container {
+            display: none;
+            margin-top: 50px;
+        }
+        h2 {
+            font-size: 24px;
+            margin-left: 40px;
+            color: #0B1957;
+        }
+        .confetti {
+            position: absolute;
+            width: 5px;
+            height: 10px;
+            background-color: red;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+        img {
+            width: 300px;
+            height: 400px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">İyi ki Doğdun Zey</h1>
+    <p id="instructions">Hediyeyi açmak için paketin üstüne bas!</p>
+    <div id="gift-box" onclick="openGift()"></div>
+    <div id="message">
+        <h2>Senin gibi harika bir arkadaşa sahip olduğum için çok şanslıyım!</h2>
+        <h2>İyi ki Doğdun! Seni çok seviyorum bebeğim! 🎉❤️🎉</h2>
+    </div>
+    <div id="photo-container">
+        <img src="zey1.JPG" alt="Zey 1">
+        <img src="zey2.JPG" alt="Zey 2">
+        <img src="zey3.jpg" alt="Zey 3">
+    </div>
+    <script>
+        function openGift() {
+            let box = document.getElementById("gift-box");
+            let message = document.getElementById("message");
+            let photoContainer = document.getElementById("photo-container");
+            let title = document.getElementById("title");
+            let instructions = document.getElementById("instructions");
+            
+            // Hide title and instructions
+            title.style.display = "none";
+            instructions.style.display = "none";
+            
+            box.classList.add("open-box");
+            setTimeout(() => {
+                box.style.display = "none";
+                message.style.display = "block";
+                photoContainer.style.display = "block";
+                createConfetti();
+            }, 1000);
+        }
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.backgroundColor = ["red", "blue", "yellow", "green", "orange"][Math.floor(Math.random() * 5)];
+                confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+    </script>
+</body>
+</html>
